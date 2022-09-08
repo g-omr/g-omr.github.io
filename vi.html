@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>viコマンド集</title>
+<meta http-equiv="content-language" content="ja">
+<meta charset="UTF-8">
+<!--META CONTENT="text/html;charset=UTF-8"-->
+</head>
+<body bgcolor="#ddffcc">
+
+<h2>viコマンド集</h2>
+
+<pre>
+※[移]はテキスト入力モードへ移行することを示します。
+※[n有効]はコマンドの前に数値を付けると動作が変わることを示します。
+  例えば、x(1文字削除)に数値を付けて、2xなら2文字削除という具合。
+  動作が分かりにくいものは説明を付けています。
+※"系"が付いているコマンドは、単語対象、行対象などの指定を行うことができます。
+  例えば、c系なら、cwで単語の変更、ccで1行変更、c^で行頭から変更という具合。
+
+<font color="orange">★モード移行</font>
+<table>
+<tr><td><b>ESC</b></td><td>コマンドモードへ移行</td></tr>
+</table>
+
+<font color="orange">★テキスト入力</font>
+<table>
+<tr><td><b>i</b></td><td>カーソルの左に文字を挿入[移]</td></tr>
+<tr><td><b>I</b></td><td>カーソル行の行頭に文字を挿入[移]</td></tr>
+<tr><td><b>a</b></td><td>カーソルの右に文字を挿入[移]</td></tr>
+<tr><td><b>A</b></td><td>カーソル行の行末に文字を挿入[移]</td></tr>
+<tr><td><b>o</b></td><td>カーソル行の下の行に空行を作って文字を挿入[移]</td></tr>
+<tr><td><b>O</b></td><td>カーソル行の上の行に空行を作って文字を挿入[移]</td></tr>
+<tr><td><b>c系</b></td><td>対象文字列を消して文字を挿入(つまり、変更)[移][n有効]</td></tr>
+<tr><td><b>C</b></td><td>カーソル位置から行末までを消して文字を挿入[移][n有効(2行目以降は全削除)]</td></tr>
+</table>
+
+<font color="orange">★変更</font>
+<table>
+<tr><td><b>r<font color="gray">文字</font></b></td><td>カーソル位置の文字を指定文字に変更[n有効(n文字を全て指定文字に変換)]</td></tr>
+<tr><td><b>R</b></td><td>複数文字置換[移]</td></tr>
+<tr><td><b>J</b></td><td>その行の末尾の改行をスペースに置換(つまり連結)[n有効(n行連結)]</td></tr>
+<tr><td><b>~</b></td><td>カーソル位置の文字を小文字/大文字変換[n有効]</td></tr>
+</table>
+
+<font color="orange">★削除</font>
+<table>
+<tr><td><b>x</b></td><td>1文字削除[n有効]</td></tr>
+<tr><td><b>d系</b></td><td>対象文字列を削除[n有効]</td></tr>
+<tr><td><b>:g/<font color="gray">文字列</font>/d(Enter要)</b></td><td>指定文字列のある行を全て削除</td></tr>
+</table>
+
+<font color="orange">★カット・コピー・ペースト</font>
+※上記の削除を行うとカットされたことになってます。
+<table>
+<tr><td><b>y系</b></td><td>対象文字列をコピー[n有効]</td></tr>
+<tr><td><b>P</b></td><td>削除(コピー)した文字列をカーソルの前にペースト[n有効]</td></tr>
+<tr><td><b>p</b></td><td>削除(コピー)した文字列をカーソルの後にペースト[n有効]</td></tr>
+<!--<tr><td><b>Shift+DEL</b></td><td>クリップボードにカット</td></tr>-->
+<!--<tr><td><b>Ctrl+INS</b></td><td>クリップボードにコピー</td></tr>-->
+<tr><td><b>Shift+INS</b></td><td>(テキスト入力モードで)クリップボードからペースト</td></tr>
+</table>
+
+<font color="orange">★カーソル移動</font>
+<table>
+<tr><td><b>h</b></td><td>カーソルを左へ(行間移動しない)[n有効]</td></tr>
+<tr><td><b>j</b></td><td>カーソルを下へ[n有効]</td></tr>
+<tr><td><b>k</b></td><td>カーソルを上へ[n有効]</td></tr>
+<tr><td><b>l</b></td><td>カーソルを右へ(行間移動しない)[n有効]</td></tr>
+<tr><td><b>        </b></td><td></td></tr>
+<tr><td><b>w</b></td><td>カーソルを1語進める[n有効]</td></tr>
+<tr><td><b>b</b></td><td>カーソルを1語戻す[n有効]</td></tr>
+<tr><td><b>e</b></td><td>カーソルを単語末尾へ(すでに単語末尾なら次の単語の末尾へ)[n有効]</td></tr>
+<tr><td><b>        </b></td><td></td></tr>
+<tr><td><b>^</b></td><td>カーソルを行頭へ</td></tr>
+<tr><td><b>$</b></td><td>カーソルを行末へ[n有効(n-1行下の行末へ移動)]</td></tr>
+<tr><td><b>G</b></td><td>カーソルを最終行行頭へ[n有効(n行目行頭へ)]</td></tr>
+<tr><td><b>-</b></td><td>前行の行頭へ[n有効]</td></tr>
+<tr><td><b>Enter</b></td><td>次行の行頭へ[n有効]</td></tr>
+</table>
+
+<font color="orange">★画面移動</font>
+<table>
+<tr><td><b>H</b></td><td>カーソルを画面先頭へ[n有効(カーソルを画面先頭からn行目へ)]</td></tr>
+<tr><td><b>M</b></td><td>カーソルを画面真中へ</td></tr>
+<tr><td><b>L</b></td><td>カーソルを画面最終行へ[n有効(カーソルを画面最終行からn行目へ)]</td></tr>
+<tr><td><b>C-D</b></td><td>1/2画面下へ[n有効(カーソルをn行下へ)]</td></tr>
+<tr><td><b>C-U</b></td><td>1/2画面上へ[n有効(カーソルをn行上へ)]</td></tr>
+<tr><td><b>C-F</b></td><td>1画面下へ[n有効(n画面下へ)]</td></tr>
+<tr><td><b>C-B</b></td><td>1画面上へ[n有効(n画面上へ)]</td></tr>
+</table>
+
+<font color="orange">★検索・置換</font>
+<table>
+<tr><td><b>/<font color="gray">文字列</font>(Enter要)</b></td><td>文字列検索</td></tr>
+<tr><td><b> n</b></td><td>次の検索文字列へ</td></tr>
+<tr><td><b> N</b></td><td>前の検索文字列へ</td></tr>
+<tr><td><b>:1,$s/<font color="gray">文字列A</font>/<font color="gray">文字列B</font>/g(Enter要)</b></td><td>文字列Aを全て文字列Bに置換</td></tr>
+<tr><td><b>:s/<font color="gray">文字列A</font>/<font color="gray">文字列B</font>/g(Enter要) </b></td><td>カーソル行の文字列Aを全て文字列Bに置換</td></tr>
+</table>
+
+<font color="orange">★ファイル操作</font>
+<table>
+<tr><td><b>ZZ</b></td><td>保存して終了</td></tr>
+<tr><td><b>:w(Enter要)</b></td><td>上書き保存</td></tr>
+<tr><td><b>:w <font color="gray">ファイル名</font>(Enter要)</b></td><td>名前を付けて保存</td></tr>
+<tr><td><b>:wq(Enter要)</b></td><td>保存して終了</td></tr>
+<tr><td><b>:q!(Enter要)</b></td><td>保存せずに終了</td></tr>
+<tr><td><b>:q(Enter要)</b></td><td>終了</td></tr>
+<tr><td><b>:e <font color="gray">ファイル名</font>(Enter要)</b></td><td>ファイルを開く</td></tr>
+</table>
+
+<font color="orange">★アンドゥなど</font>
+<table>
+<tr><td><b>u</b></td><td>アンドゥ[n有効]</td></tr>
+<tr><td><b>.</b></td><td>作業の繰り返し</td></tr>
+</table>
+</pre>
+<hr>
+<a href="./">HOME</a><br>
+<!--img src="http://www.ritsumei.ac.jp/cgi-bin/nph-count?width=6&link=http://www.ritsumei.ac.jp/~tomori/vi.html"><font color="eeffdd">(since2005/7/6)</font-->
+</body>
+</html>
