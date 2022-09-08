@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="Shift_JIS" standalone="no"?>
+
+<OperationHistory version="5.0.2">
+  <basicData>
+    <developer>(developer's name)</developer>
+  </basicData>
+
+  <operations>   <!-- children of an operations-element: a sequence of the following elements -->
+
+    <normalOperation 
+        ccp="(NO/CUT/PASTE)" 
+        file="(name of source file)"
+        hash="(hash value of the operation)" 
+        offset="(offset value that means the position where the operation was performed)" 
+        time="(time when the operation was performed)">
+      <inserted>(inserted string)</inserted>
+      <deleted>(deleted string)</deleted>
+    </normalOperation>
+
+    <compoundOperation 
+        name="(name of the operation; name of refactoring, etc.)"
+        hash="(hash value of the operation)"
+        time="(time when the operation was performed)">
+      <normalOperation>...</normalOperation>...  <!-- children of an compoundOperation-element: a sequence of normalOperation-elements -->
+    </compoundOperation>
+
+    <copyOperation
+        file="(name of the source file)"
+        offset="(offset value that means the position where the operation was performed)" 
+        time="(time when the operation was performed)">
+      <copied>(copiedString)</copied>
+    </copyOperation>
+
+    <menuOperation 
+        file="(name of a source file which was active at the time)"
+        label="(ID of the menu item)"
+        time="(time when the operation was performed)"/>
+
+    <fileOperation 
+        file="(name of a source file)"
+        time="(time when the operation was performed)"
+        type="(SAVE/OPEN/CLOSE/ACT)">
+      <code>(optional: snapshot of the source file at the time)</code>
+    </fileOperation>
+
+    <commitOperation 
+        time="(time when the operation was performed)" 
+        file="(name of a source file which was active at the time)" 
+        comment="(comment which was input by the developer)"/>
+
+  </operations>
+</OperationHistory>
+
+
+<!-- When a source code editor is closed, recorded operations (performed on the file) are output into an operation history file. -->
