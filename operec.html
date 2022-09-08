@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OperationRecorder</title>
+<meta http-equiv="content-language" content="ja">
+<meta charset="UTF-8">
+<!--META CONTENT="text/html;charset=UTF-8"-->
+</head>
+<body bgcolor="#ffffcc">
+
+<h1>OperationRecorder</h1>
+
+<h3>ツール概要 / What's this?</h3>
+
+<p>
+OperationRecorderは、統合開発環境EclipseのJavaエディタ上で行ったソースコードの編集操作やメニュー内のツールの呼び出し等を記録するツールです。<br/>
+ソースコード記述中の操作を残しておくことで、次のような目的を達成することを狙っています。
+</p>
+
+<ul>
+<li>ソースコードを書いた人の意図を推測可能にする</li>
+<li>効率の良い開発と悪い開発の違いを分析する</li>
+<li>よく行われる変更を明らかにし、変更の再利用を促進する</li>
+<li>実際の開発におけるツールの利用状況を把握し、IDEの改善に役立てる</li>
+</ul>
+
+<p>
+OperationRecorder records every editing operation and built-in tool invocation that were performed on the Eclipse Java editor.<br/>
+By using recorded operations, you can analyze how software development were conducted.
+</p>
+
+<p>
+記録された操作履歴は、XML形式のファイルに出力されます。[<a href="./operec/sample.png">出力例を表示</a>]<br/>
+操作履歴ファイルの内容については<a href="./operec/specification_v502.txt">こちら</a>をご参照ください。<br/>
+操作履歴を再生するOperationReplayerも開発しました。[<a href="./operec/operationreplayer.png">出力例を表示</a>]<br/>
+</p>
+
+<p>
+OperationRecorder outputs recorded operations into XML files. [<a href="./operec/sample.png">Example</a>]<br/>
+Please refer <a href="./operec/specification_v502.txt">this file</a> to see the current operation history format.<br/>
+We also implemented OperationReplayer, which replays recorded operations. [<a href="./operec/operationreplayer.png">Screenshot</a>]<br/>
+</p>
+
+<h3>関連文献 / Publications</h3>
+
+<ul>
+<li>Takayuki Omori, Katsuhisa Maruyama, Atsushi Ohnishi: "Lightweight Operation History Graph for Traceability on Program Elements", IEICE Transactions on Information and Systems，Vol.E104-D, No.3, pp.404-418 (2021/03) </li>
+<li>Takayuki Omori, Katsuhisa Maruyama: "Comparative Study between Two Approaches Using Edit Operations and Code Differences to Detect Past Refactorings", IEICE Transactions on Information and Systems，Vol.E101-D, No.3, pp.644-658 (2018/03) </li>
+<li>Takayuki Omori, Katsuhisa Maruyama: "An Editing-operation Replayer with Highlights Supporting Investigation of Program Modifications", Proceedings of 12th International Workshop on Principles on Software Evolution / 7th ERCIM Workshop on Software Evolution (IWPSE/EVOL'11), pp.101-105 (2011/09)</li>
+<li>大森隆行，丸山勝久：「開発者による編集操作に基づくソースコード変更抽出」，情報処理学会論文誌，Vol.49，No.7，pp.2349-2359 (2008/07)</li>
+<li>Takayuki Omori, Katsuhisa Maruyama: "A Change-aware Development Environment by Recording Editing Operations of Source Code", Proceedings of 5th Working Conference on Mining Software Repositories (MSR'08), pp.31-34 (2008/05)</li>
+<li>大森隆行：「拡張性の高い次世代ソフトウェア統合開発環境に関する研究」，立命館大学 2007年度博士論文 (2008/03)</li>
+
+<p>他にも多数あります。</p>
+</ul>
+
+
+<h3>動作環境 / Recommended environments</h3>
+
+<p>
+最近は Ubuntu + Eclipse 202109 + Java11で開発中。<br/>
+</p>
+
+
+<!-- Eclipse3.4(Ganymede), 3.5(Galileo), 3.6(Helios), 3.7(Indigo), 4.2(Juno), 4.3(Kepler), 4.4(Luna), 4.7(Oxygen), 4.8(Photon)-->
+
+
+<h3>ダウンロード / Download</h3>
+
+<p>
+以下jarファイルをEclipseのdropinsフォルダに置いてください。
+</p>
+<p>
+Put the following jar files into Eclipse's dropins folder.
+</p>
+
+<a href="./operec/OperationRecorder_6.0.0.jar">OperationRecorder_6.0.0.jar</a><br/>
+<a href="./operec/OperationRecorderBase_6.0.0.jar">OperationRecorderBase_6.0.0.jar</a><br/>
+<a href="./operec/OperationReplayer_4.0.0.jar">OperationReplayer_4.0.0.jar</a><br/>
+
+<p>
+OperationRecorderの開発は2022年現在も継続中です。<br/>
+最新版をご希望の方は直接ご連絡下さい。
+</p>
+<p>
+OperationRecorder is still an active project as of 2022.<br/>
+Please don't hesitate to contact me if you want to try the newest version.
+</p>
+
+
+<h3>連絡先 / Contact</h3>
+
+大森 隆行 (Takayuki Omori)<br/>
+立命館大学情報理工学部<br/>
+tomori＿ａｔ＿is.ritsumei.ac.jp<br/>
+
+<hr size="0">
+
+<a href="./">HOME</a>
+
+<hr/>
+
+<!--img src="http://www.ritsumei.ac.jp/cgi-bin/nph-count?width=5&link=http://www.ritsumei.ac.jp/~tomori/operec.html">
+<font color="#ffffcc">(Since:2009/2/14)</font-->
+</body>
+</html>
