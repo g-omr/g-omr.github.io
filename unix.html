@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UNIXコマンド集</title>
+<meta http-equiv="content-language" content="ja">
+<meta charset="UTF-8">
+<!--META CONTENT="text/html;charset=UTF-8"-->
+<style type="text/css">
+<!--
+BODY, TH, TD {font-size: 10pt; }
+-->
+</style>
+</head>
+<body bgcolor="#ddffcc">
+
+<a href="#unix">UNIX</a>(<a href="#dir">ディレクトリ基本操作</a>、<a href="#file">ファイル操作</a>、<a href="#text">テキスト処理</a>、<a href="#cmd">コマンド履歴・再実行</a>、<a href="#prj">プロセス・ジョブ</a>、<a href="#prn">プリントアウト</a>、<a href="#secur">セキュリティ</a>、<a href="#du">使用容量</a>、<a href="#ln">リンク</a>、<a href="#al">エイリアス</a>、<a href="#man">コマンドを調べる</a>、<a href="#compdecomp">解凍・圧縮</a>、<a href="#network">ネットワーク</a>、<a href="#manage">システム管理</a>、<a href="#variable">シェル変数・環境変数</a>、<a href="#unix_other">その他</a>)、
+<a href="#emacs">Emacs</a>、
+<a href="#latex">Latex</a>、
+<a href="#prog">プログラミング関連</a>、
+<a href="#other">その他</a>
+
+<hr>
+
+<a name="unix"></a><h2>UNIXコマンド</h2>
+
+<a name="dir"></a>
+<font color="orange">★ディレクトリ基本操作</font>
+<table>
+<tr><td>pwd</td>						<td>現在ディレクトリのフルパス表示</td></tr>
+<tr><td>cd</td>							<td>ホームディレクトリへ移動</td></tr>
+<tr><td>　<font color="gray">(dir)</font></td>			<td>指定ディレクトリへ移動</td></tr>
+<tr><td>mkdir <font color="gray">(dir)</font></td>		<td>新規ディレクトリを作成</td></tr>
+<tr><td>mkdir -p <font color="gray">(dir)</font></td>		<td>新規ディレクトリを再帰的に作成</td></tr>
+<tr><td>rmdir <font color="gray">(dir)</font></td>		<td>空のディレクトリを削除</td></tr>
+<tr><td>rm -r <font color="gray">(dir)</font></td>		<td>指定ディレクトリを中のファイルごと削除</td></tr>
+<tr><td>cp -r <font color="gray">(dirA) (dirB)</font></td>	<td>ディレクトリAをディレクトリBにコピー</td></tr>
+<tr><td>mv <font color="gray">(file) (dir)</font></td>		<td>ファイルをディレクトリへ移動</td></tr>
+<tr><td>ls</td>							<td>現在ディレクトリのファイル一覧表示</td></tr>
+<tr><td>　<font color="gray">(dir)</font></td>			<td>指定ディレクトリのファイル一覧表示</td></tr>
+<tr><td>　-d <font color="gray">(dir)</font></td>		<td>指定ディレクトリ自身の情報を表示</td></tr>
+<tr><td>　-a</td>						<td>隠しファイルも含む全てのファイル表示</td></tr>
+<tr><td>　-l</td>						<td>詳細情報を表示</td></tr>
+<tr><td>　-F</td>						<td>ファイルの種類を示すマークを付けて表示</td></tr>
+<tr><td>　-R</td>						<td>ディレクトリ下層までたどって表示</td></tr>
+<tr><td>　-1</td>						<td>1行に1つの結果を表示</td></tr>
+<tr><td>cd -</td>						<td>直前のディレクトリへ移動(1つまでしか戻れない)</td></tr>
+<tr><td>pushd <font color="gray">(dir)</font></td>		<td>現在ディレクトリをディレクトリスタックに積み、ディレクトリ移動</td></tr>
+<tr><td>popd</td>						<td>ディレクトリスタック先頭のディレクトリへ移動して、スタックから降ろす</td></tr>
+</table>
+<br>
+<a name="file"></a>
+<font color="orange">★ファイル操作</font>
+<table>
+<tr><td>cat <font color="gray">(file)</font></td>		<td>ファイルの内容表示</td></tr>
+<tr><td>　-n</td>						<td>行番号を付加して表示</td></tr>
+<tr><td>rm <font color="gray">(file)</font></td>		<td>ファイルを削除</td></tr>
+<tr><td>　-i</td>						<td>ファイル削除の確認をする</td></tr>
+<tr><td>cp <font color="gray">(fileA) (fileB)</font></td>	<td>ファイルAをファイルBにコピー</td></tr>
+<tr><td>　-i</td>						<td>ファイル上書きの確認をする</td></tr>
+<tr><td>　-p</td>						<td>最終変更日時や所有者などの属性を変えずにコピー</td></tr>
+<tr><td>mv <font color="gray">(fileA) (fileB)</font></td>	<td>ファイルAの名前をファイルBに変更</td></tr>
+<tr><td>　-i</td>						<td>ファイル上書きの確認をする</td></tr>
+<tr><td>touch <font color="gray">(file)</font></td>		<td>空のファイルを作成</td></tr>
+<tr><td>touch <font color="gray">(既存file)</font></td>		<td>ファイル更新日時を変更</td></tr>
+<tr><td>file <font color="gray">(file)</font></td>		<td>ファイルの種類を調べる</td></tr>
+</table>
+<br>
+<font color="orange">★ファイル検索</font>
+<table>
+<tr><td>find <font color="gray">(dir)</font></td>			<td>指定ディレクトリ以下のファイルを列挙</td></tr>
+<tr><td>　-name <font color="gray">(文字列)</font></td>			<td>指定した文字列に一致するファイル・ディレクトリを検索</td></tr>
+<tr><td>　</td>								<td>(※「文字列」にはワイルドカード文字を使用できる。その時は文字列を""で囲む。)</td></tr>
+<tr><td>　</td>								<td>(例：find / -name "*.txt" で、拡張子.txtのファイルをルート以下から再帰的に検索。)</td></tr>
+<tr><td>　-user <font color="gray">(user)</font></td>			<td>指定ユーザ名が所有者のファイル・ディレクトリを検索</td></tr>
+<tr><td>　-size <font color="gray">(サイズ)</font></td>			<td>指定サイズのファイル・ディレクトリを検索</td></tr>
+<tr><td>　</td>								<td>(※サイズは「+5k(5キロバイト以上)」「-512c(512バイト以下)」などと指定。)</td></tr>
+<tr><td>　-type <font color="gray">(種類)</font></td>			<td>指定した種類のファイル・ディレクトリを検索</td></tr>
+<tr><td>　</td>								<td>(※f:ファイル d:ディレクトリ)</td></tr>
+<tr><td>　-amin <font color="gray">(分)</font></td>			<td>最終アクセスが指定分に該当するファイル・ディレクトリを検索</td></tr>
+<tr><td>locate <font color="gray">(文字列)</font></td>			<td>指定文字列を名前に含むファイル・ディレクトリを列挙</td></tr>
+</table>
+<br>
+<a name="text"></a>
+<font color="orange">★テキスト処理</font>
+<table>
+<tr><td>more <font color="gray">(file)</font></td>		<td>ファイルの内容表示(ページごとに止まる)</td></tr>
+<tr><td>less <font color="gray">(file)</font></td>		<td>ファイルの内容表示(スクロール操作できる)</td></tr>
+<tr><td>lv <font color="gray">(file)</font></td>		<td>ファイルの内容表示(ページごとに止まる＋α)</td></tr>
+<tr><td>head <font color="gray">(file)</font></td>		<td>ファイルの先頭10行を表示</td></tr>
+<tr><td>　-<font color="gray">(行数)</font></td>		<td>ファイルの先頭指定行数を表示</td></tr>
+<tr><td>tail <font color="gray">(file)</font></td>		<td>ファイルの末尾10行を表示</td></tr>
+<tr><td>　-<font color="gray">(行数)</font></td>		<td>ファイルの末尾指定行数を表示</td></tr>
+<tr><td>　+<font color="gray">(行数)</font></td>		<td>ファイルの末尾指定行以降を表示</td></tr>
+<tr><td>grep <font color="gray">(検索文字列) (file)</font></td>	<td>指定文字列がある行だけを表示</td></tr>
+<tr><td></td>								<td>※コマンドの出力を「|」で渡して使うことが多い</td></tr>
+<tr><td>　-c</td>						<td>マッチした行数を表示</td></tr>
+<tr><td>　-v</td>						<td>マッチしない行を表示</td></tr>
+<tr><td>　-A <font color="gray">(数)</font></td>			<td>マッチした行の後ろの行(指定した分)も表示</td></tr>
+<tr><td>　-B <font color="gray">(数)</font></td>			<td>マッチした行の前の行(指定した分)も表示</td></tr>
+<tr><td>grep <font color="gray">(検索文字列) -rl (dir)</font></td>	<td>指定ディレクトリ以下を再帰的に検索し、指定文字列を含むファイル一覧を表示(ファイル内全文検索)</td></tr>
+<tr><td>sed -e s/<font color="gray">(pattern)</font>/<font color="gray">(replacement)</font>/g <font color="gray">(file)</font></td>	<td>文字列置換</td></tr>
+<tr><td>wc <font color="gray">(file)</font></td>			<td>ファイルの行数、単語数、文字数を表示</td></tr>
+<tr><td>diff <font color="gray">(fileA) (fileB)</font></td>		<td>fileAとfileBの差分(変更点)を表示</td></tr>
+<tr><td>cut <font color="gray">(file)</font></td>		<td>各行から文字を切り出して表示</td></tr>
+<tr><td>　-d <font color="gray">(文字)</font></td>		<td>区切り文字(半角のみ)を指定</td></tr>
+<tr><td>　-f <font color="gray">(数字)</font></td>		<td>何番目のデータを表示するかを指定(先頭は1番目。「,」「-」で複数指定可)</td></tr>
+<tr><td>echo <font color="gray">(文字列)</font> | cut -d " " -f <font color="gray">(n)</font> </td><td>文字列を空白で区切った結果のnフィールド目を出力</td></tr>
+<tr><td></td>								<td>m-n, m-, -nのような指定も可。先頭は1</td></tr>
+<tr><td>echo <font color="gray">(文字列)</font> | cut -c <font color="gray">(n)</font> </td><td>n文字目のみを切り出す</td></tr>
+<tr><td></td>								<td>m-n, m-, -nのような指定も可。先頭は1</td></tr>
+<tr><td>echo <font color="gray">(文字列)</font> | rev               <td>文字列を逆転</td></tr>
+<tr><td>uniq <font color="gray">(file)</font></td>		<td>連続している重複行を削除して表示</td></tr>
+<tr><td>sort <font color="gray">(file)</font></td>		<td>行単位で並べ替えを行う(アルファベット順)</td></tr>
+<tr><td>　-t <font color="gray">(文字)</font></td>		<td>区切り文字を指定(各行が特定の文字で区切られた同じ構造になっている場合に使用)</td></tr>
+<tr><td>　+<font color="gray">(N1)</font> -<font color="gray">(N2)</font></td>		<td>N1〜N2-1番目のデータを比較対象にする(先頭データは0番目)</td></tr>
+<tr><td>　-n</td>						<td>数値として比較</td></tr>
+<tr><td>　-b</td>						<td>先行ブランク無視</td></tr>
+<tr><td>nkf --guess <font color="gray">(file)</font></td>		<td>文字コードを調べる</td></tr>
+<tr><td>nkf -e <font color="gray">(file)</font></td>			<td>文字コードをEUCに変換して標準出力に出力</td></tr>
+<tr><td>　-j</td>							<td>JISに変換</td></tr>
+<tr><td>　-s</td>							<td>Shift_JISに変換</td></tr>
+<tr><td>　-w</td>							<td>UTF-8に変換</td></tr>
+<tr><td>　-Lu</td>							<td>改行コードをLF(UNIX形式)に変換</td></tr>
+<tr><td>　-Lw</td>							<td>改行コードをCRLF(Windows形式)に変換</td></tr>
+<tr><td>　-Lm</td>							<td>改行コードをCR(Mac形式)に変換</td></tr>
+<tr><td>　--overwrite</td>						<td>入力ファイルに上書きして出力</td></tr>
+<tr><td>dos2unix -o <font color="gray">(file)</font></td>		<td>改行コード変換</td></tr>
+<tr><td>unix2dos -o <font color="gray">(file)</font></td>		<td>改行コード変換</td></tr>
+</table>
+<br>
+<a name="cmd"></a>
+<font color="orange">★コマンド履歴、再実行</font>
+<table>
+<tr><td>history</td>				<td>コマンドの履歴リストを表示</td></tr>
+<tr><td>!(履歴リスト中のコマンド番号)</td>	<td>そのコマンドを再実行</td></tr>
+<tr><td>!(文字列)</td>				<td>その文字列で始まるコマンドを再実行</td></tr>
+<tr><td>!!</td>					<td>直前コマンドを再実行</td></tr>
+</table>
+<br>
+<a name="prj"></a>
+<font color="orange">★プロセス・ジョブ操作と強制終了</font>
+<table>
+<tr><td>ps</td>							<td>プロセス一覧表示</td></tr>
+<tr><td>jobs</td>						<td>ジョブ一覧表示</td></tr>
+<tr><td>bg</td>							<td>現在ジョブ(current job)のバックグラウンド実行</td></tr>
+<tr><td>fg</td>							<td>現在ジョブ(current job)のフォアグラウンド実行</td></tr>
+<tr><td>kill</td>						<td></td></tr>
+<tr><td>　<font color="gray">(プロセスID)</font></td>		<td>そのプロセスを強制終了</td></tr>
+<tr><td>　-9 <font color="gray">(プロセスID)</font></td>	<td>何が何でも強制終了</td></tr>
+<tr><td>　-s <font color="gray">(signal) (プロセスID)</font></td>	<td>指定したシグナルの送信</td></tr>
+<tr><td>　-s SIGSTOP <font color="gray">(プロセスID)</font></td>	<td>プロセスの一時停止</td></tr>
+<tr><td>　-s SIGCONT <font color="gray">(プロセスID)</font></td>	<td>プロセスの再開</td></tr>
+<tr><td colspan="2">　※プロセスIDの代わりに「%(ジョブ番号)」でもよい</td></tr>
+</table>
+<br>
+<a name="prn"></a>
+<font color="orange">★プリントアウト</font>
+<table>
+<tr><td>lp</td>							<td></td></tr>
+<tr><td>　<font color="gray">(file)</font></td>			<td>印刷</td></tr>
+<tr><td>　-d</td>						<td>プリンタ番号を指定</td></tr>
+<tr><td>lpstat</td>						<td>印刷待ち状態の表示</td></tr>
+<tr><td>cancel -u <font color="gray">(userID)</font></td>	<td>自分の印刷要求を全てキャンセル</td></tr>
+</table>
+<br>
+<a name="secur"></a>
+<font color="orange">★セキュリティ</font>
+<table>
+<tr><td>yppasswd</td>						<td>パスワード変更</td></tr>
+<tr><td>chmod <font color="gray">(モード) (対象)</font></td>	<td>アクセス権の変更</td></tr>
+<tr><td>xlock</td>						<td>操作防止のためのロックをかける</td></tr>
+<tr><td>last</td>						<td>ログイン履歴の表示</td></tr>
+</table>
+<br>
+<a name="du"></a>
+<font color="orange">★使用容量</font>
+<table>
+<tr><td>du</td>						<td>子ディレクトリのディスク使用量表示</td></tr>
+<tr><td>　-hs</td>					<td>現在ディレクトリ以下のディスク使用量の合計表示</td></tr>
+<tr><td>df</td>						<td>ディスクの空き容量表示</td></tr>
+<tr><td>　-h</td>					<td>読みやすい単位で表示(human-readable)</td></tr>
+</table>
+<br>
+<a name="ln"></a>
+<font color="orange">★リンク</font>
+<table>
+<tr><td>ln -s <font color="gray">(file_path) (link_name)</font></td>	<td>シンボリックリンク（ショートカット）の作成</td></tr>
+<tr><td></td>								<td>※file_pathは絶対パスまたは作成するシンボリックリンクからの相対パス</td></tr>
+</table>
+<br>
+<a name="al"></a>
+<font color="orange">★エイリアス</font>
+<table>
+<tr><td>alias <font color="gray">(new_command)='(command)'</font></td>	<td>エイリアス（コマンドの別名）の作成</td></tr>
+<tr><td></td>	<td>(※いつも使うものは~/.bashrcに記述しましょう)</td></tr>
+<tr><td>alias</font></td>	<td>エイリアス一覧を表示</td></tr>
+<tr><td>unalias <font color="gray">(command)</font></td>	<td>エイリアスの削除</td></tr>
+</table>
+<br>
+<a name="man"></a>
+<font color="orange">★コマンドを調べる</font>
+<table>
+<tr><td>man <font color="gray">(cmd)</font></td>						<td>そのコマンドのマニュアルを表示</td></tr>
+<tr><td>man -k <font color="gray">(キーワード)</font></td>					<td>キーワード検索</td></tr>
+<tr><td>man <font color="gray">(セクション)</font> <font color="gray">(cmd)</font></td>		<td>そのコマンドのマニュアル(該当セクション)を表示</td></tr>
+<tr><td>which <font color="gray">(cmd)</font></td>						<td>そのコマンドの実行ファイルがどこにあるか表示</td></tr>
+</table>
+<br>
+<a name="compdecomp"></a>
+<font color="orange">★解凍、圧縮</font>
+<table>
+<tr><td>tar -xvf <font color="gray">(file.tar)</font></td>						<td>.tarの解凍</td></tr>
+<tr><td>gunzip <font color="gray">(file.gz)</font></td>							<td>.gzの解凍</td></tr>
+<tr><td>tar -xvzf <font color="gray">(file.tar.gz)</font></td>						<td>.tar.gzの解凍</td></tr>
+<tr><td>tar -cvzf <font color="gray">(file.tar.gz)</font> <font color="gray">(file_path)</font></td>	<td>.tar.gzの作成</td></tr>
+<tr><td>tar -tvf <font color="gray">(file.tar)</font></td>						<td>.tarファイルの中身を表示</td></tr>
+<tr><td>p7zip <font color="gray">(file)</font></td>							<td>7z形式で圧縮し、file.7zを生成(圧縮前のファイルは削除)</td></tr>
+</table>
+<br>
+<a name="network"></a>
+<font color="orange">★ネットワーク</font>
+<table>
+<tr><td colspan="2">※root権限が必要なものがある</td></tr>
+<tr><td>ip a</td>									<td>各インタフェースのアドレス表示(ip address show)</td></tr>
+<tr><td>ip a add <font color="gray">(ip_addr)/(mask)</font> dev <font color="gray">(intf)</td>	<td>インタフェースのIP設定追加</td></tr>
+<tr><td>ip a del <font color="gray">(ip_addr)/(mask)</font> dev <font color="gray">(intf)</td>	<td>インタフェースのIP設定削除</td></tr>
+<tr><td>ip route									<td>経路情報の表示</td></tr>
+<tr><td>ip neigh									<td>近傍のMACアドレス表示</td></tr>
+<tr><td>ip link set <font color="gray">(intf)</font> promisc on				<td>プロミスキャスモードをオン</td></tr>
+<tr><td>ip link set <font color="gray">(intf)</font> promisc off			<td>プロミスキャスモードをオフ</td></tr>
+<tr><td>telnet <font color="gray">(host)</font></td>					<td>hostにリモート接続</td></tr>
+<tr><td>telnet <font color="gray">(host) (port)</font></td>				<td>hostにリモート接続（ポート番号指定）</td></tr>
+<tr><td>ssh <font color="gray">(host)</font></td>					<td>hostにリモート接続(セキュア)</td></tr>
+<tr><td>scp <font color="gray">(file) (user@host:dir)</font></td>			<td>リモートへファイル転送</td></tr>
+<tr><td>scp <font color="gray">(user@host:file) (dir)</font></td>			<td>ローカルへファイル転送</td></tr>
+<tr><td>sftp <font color="gray">(user@host)</font></td>					<td>hostとの間のファイル転送</td></tr>
+<tr><td>　(利用可能コマンド)</td>							<td></td></tr>
+<tr><td colspan="2">　cd, lcd, ls, lls, get (リモートpath), mget (リモートpaths), put (ローカルpath), mput (ローカルpaths), help, exit</td></tr>
+<tr><td>　※↑l付きはローカル、付いてないのはリモート</td>				<td></td></tr>
+<tr><td>curl <font color="gray">(URL)</font></td>					<td>指定URLからファイルをダウンロード</td></tr>
+<tr><td>curl <font color="gray">(URL)</font> -o <font color="gray">(file)</font></td>	<td>指定URLからファイルをダウンロードしてファイルに保存</td></tr>
+<tr><td>curl -O <font color="gray">(URL)</font></td>					<td>指定URLからファイルをダウンロードしてリモートと同名のファイルに保存</td></tr>
+<tr><td>nmcli</td>									<td>ネットワーク設定の表示</td></tr>
+</table>
+<br>
+<a name="manage"></a>
+<font color="orange">★システム管理</font>
+<table>
+<tr><td colspan="2">※root権限が必要なものがある</td></tr>
+<tr><td>su</td>						<td>rootになる</td></tr>
+<tr><td>shutdown</td>					<td>シャットダウン</td></tr>
+<tr><td>　-r</td>					<td>シャットダウンして再起動する</td></tr>
+<tr><td>　-h</td>					<td>シャットダウンして停止する</td></tr>
+<tr><td>　<font color="gray">(hh:mm)</font></td>	<td>指定した時間にシャットダウン</td></tr>
+<tr><td>　+<font color="gray">(数字)</font></td>	<td>指定した分経過後にシャットダウン</td></tr>
+<tr><td>reboot</td>					<td>再起動</td></tr>
+<tr><td>hostname</td>					<td>ホスト名(コンピュータ名)を表示</td></tr>
+<tr><td>groups</td>					<td>所属グループを表示</td></tr>
+<tr><td>chown <font color="gray">(user) (file)</font></td>	<td>ファイルの所有者をuserに変更</td></tr>
+<tr><td>chgrp <font color="gray">(group) (file)</font></td>	<td>ファイルの所有グループをgroupに変更</td></tr>
+<tr><td>useradd <font color="gray">(new_user)</font></td>	<td>新しいユーザを登録</td></tr>
+<tr><td>userdel <font color="gray">(user)</font></td>		<td>ユーザを削除</td></tr>
+<tr><td>groupadd <font color="gray">(new_group)</font></td>	<td>新しいグループを登録</td></tr>
+<tr><td>groupdel <font color="gray">(group)</font></td>		<td>グループを削除</td></tr>
+<tr><td>passwd <font color="gray">(user)</font></td>		<td>指定ユーザのパスワードを設定</td></tr>
+<tr><td>who</td>						<td>現在ログインしているユーザを表示</td></tr>
+<tr><td>whoami</td>						<td>現在のログイン名を表示</td></tr>
+</table>
+<br>
+<a name="variable"></a>
+<font color="orange">★環境変数・シェル変数</font>
+<table>
+<tr><td>set</td>									<td>全ての変数とその値を表示</td></tr>
+<tr><td>printenv</td>									<td>全ての環境変数とその値を表示</td></tr>
+<tr><td>
+ <font color="gray">($変数)</font></td>					<td>その変数の値を表示</td></tr>
+<tr><td><font color="gray">(変数)</font>=<font color="gray">(初期値)</font></td>	<td>シェル変数を初期値を指定して宣言</td></tr>
+<tr><td>export <font color="gray">(変数)</font></td>					<td>変数の環境変数化</td></tr>
+<tr><td>export <font color="gray">(変数)</font>=<font color="gray">(初期値)</font></td>	<td>環境変数を初期値を指定して宣言</td></tr>
+<tr><td>unset <font color="gray">(変数)</font></td>					<td>変数を削除</td></tr>
+</table>
+<br>
+<a name="unix_other"></a>
+<font color="orange">★その他コマンド</font>
+<table>
+<tr><td>echo <font color="gray">(文字列)</font></td>			<td>その文字列を標準出力に表示(リダイレクト用)</td></tr>
+<tr><td>echo <font color="gray">(cmd)</font></td>			<td>そのコマンドを(ワイルドカード文字を展開して)表示</td></tr>
+<tr><td>echo -n <font color="gray">(文字列)</font></td>			<td>改行文字を含めずecho</td></tr>
+<tr><td>source <font color="gray">(file)</font></td>			<td>指定したファイル内に書かれたコマンド列を実行 (例：source ~/.bashrc でbashrcの内容を反映)</td></tr>
+<tr><td>watch -n <font color="gray">(秒数) (コマンド)</font></td>	<td>そのコマンドを指定秒数ごとに実行して、出力結果を全画面表示</td></tr>
+<tr><td>chmail</td>							<td>メール転送先設定</td></tr>
+<tr><td></td>								<td>※/var/forward/(ユーザ名)に転送先をコンマで区切って直接書いてもよい</td></tr>
+<tr><td>stty -a</td>							<td>端末に関する情報を表示</td></tr>
+<tr><td>date</td>							<td>現在日時・時刻の表示</td></tr>
+<tr><td>watch -n 1 date</td>						<td>時計を常時表示(端末を透過させて前面固定にしておくと、他アプリケーションの全画面表示時にも時刻を確認できて便利)</td></tr>
+</table>
+<br>
+<font color="orange">★ワイルドカード文字</font>
+<table>
+<tr><td>?</td>			<td>任意の一文字</td></tr>
+<tr><td>*</td>			<td>0文字以上の文字列</td></tr>
+<tr><td>[(文字セット)]</td>	<td>文字セットに含まれる一文字</td></tr>
+<tr><td></td>			<td>(※文字セットは「abcd」や「a-d1-9」というような指定方法)</td></tr>
+<tr><td>[!(文字セット)]</td>	<td>文字セットに含まれない一文字</td></tr>
+<tr><td>{(文字列,...)}</td>	<td>文字列リストに含まれる文字列</td></tr>
+</table>
+<br>
+<font color="orange">★リダイレクトとパイプ</font>
+<table>
+<tr><td><font color="gray">(cmd1)</font> | <font color="gray">(cmd2)</font></td>	<td>パイプ(cmd1の標準出力をcmd2の標準入力に)</td></tr>
+<tr><td><font color="gray">(cmd)</font> &gt; <font color="gray">(file)</font></td>	<td>cmdの結果(標準出力)をfileに書き出す</td></tr>
+<tr><td><font color="gray">(cmd)</font> 1&gt; <font color="gray">(file)</font></td>	<td>cmdの結果(標準出力)をfileに書き出す</td></tr>
+<tr><td><font color="gray">(cmd)</font> 2&gt; <font color="gray">(file)</font></td>	<td>cmdの結果(標準エラー出力)をfileに書き出す</td></tr>
+<tr><td><font color="gray">(cmd)</font> &amp;&gt; <font color="gray">(file)</font></td>	<td>cmdの結果(標準出力、標準エラー出力)をfileに書き出す</td></tr>
+<tr><td><font color="gray">(cmd)</font> &gt;&amp;1</font></td>				<td>cmdの結果(標準出力)を標準出力に書き出す</td></tr>
+<tr><td><font color="gray">(cmd)</font> &gt;&amp;2</font></td>				<td>cmdの結果(標準出力)を標準エラー出力に書き出す</td></tr>
+<tr><td>xargs</td>									<td>標準入力をコマンド引数にする</td></tr>
+<tr><td><font color="gray">(cmd1)</font> | xargs <font color="gray">(cmd2)</font></td>			<td>cmd1の結果(標準出力)をcmd2の引数にする</td></tr>
+</table>
+<br>
+<font color="orange">★その他</font>
+<table>
+<tr><td>\<font color="gray">(行末)</font></td>	<td>次の行にコマンドを継続</td></tr>
+<tr><td><font color="gray">(cmd1)</font> ; <font color="gray">(cmd2)</font></td>	<td>コマンドの継続実行</td></tr>
+</table>
+<br>
+
+<a name="emacs"></a><h2>Emacs</h2>
+<font color="orange">★基本ウインドウ操作</font>
+<table>
+<tr><td>[Files]-[MakeNewFrame]</td>	<td>新しいウインドウを開く(※同じファイルを開くと一方の変更が他方に反映される)</td></tr>
+<tr><td>C-x C-c</td>			<td>終了</td></tr>
+<tr><td>M-x line</td>			<td>行数表示</td></tr>
+</table>
+<br>
+<font color="orange">★基本文書操作</font>
+<table>
+<tr><td>C-x C-f</td>			<td>ファイルを開く(新規も)</td></tr>
+<tr><td>C-x C-s</td>			<td>上書き保存</td></tr>
+<tr><td>C-x C-w</td>			<td>ファイル名を指定して保存</td></tr>
+<tr><td>C-_</td>			<td>アンドゥ</td></tr>
+<tr><td>C-Space</td>			<td>選択範囲始点設定</td></tr>
+<tr><td>C-w</td>			<td>選択範囲始点からカーソルの前までをカット</td></tr>
+<tr><td>M-w</td>			<td>選択範囲始点からカーソルの前までをコピー</td></tr>
+<tr><td>C-y</td>			<td>ペースト</td></tr>
+<tr><td>範囲をLdrag</td>		<td>その範囲をコピー</td></tr>
+<tr><td>範囲をLdrag+WRclick</td>	<td>その範囲をカット</td></tr>
+<tr><td>Cclick</td>			<td>ペースト</td></tr>
+</table>
+<br>
+<font color="orange">★検索と置換</font>
+<table>
+<tr><td>[Search]-[QueryReplace]</td>	<td>連続文字列置換</td></tr>
+<tr><td></td>				<td>(※置換中の操作：y:置換して次へ n:置換せずに次へ q:置換終了)</td></tr>
+<tr><td>C-s (文字列)</td>		<td>文字列検索(順方向)(C-s,rを押すたびに次、前へ)</td></tr>
+<tr><td>C-r (文字列)</td>		<td>文字列検索(逆方向)(C-s,rを押すたびに次、前へ)</td></tr>
+</table>
+<br>
+<font color="orange">★カーソル、スクロール操作</font>
+<table>
+<tr><td>C-a</td>		<td>行頭へ</td></tr>
+<tr><td>C-e</td>		<td>行末へ</td></tr>
+<tr><td>Fn+↑(M-v)</td>		<td>一画面上へ</td></tr>
+<tr><td>Fn+↓(C-v)</td>		<td>一画面下へ</td></tr>
+<tr><td>Fn+←(M-&lt;)</td>	<td>文頭へ</td></tr>
+<tr><td>Fn+→(M-&gt;)</td>	<td>文末へ</td></tr>
+<tr><td>ScrollBarをCdrag</td>	<td>画面のスクロール</td></tr>
+<tr><td>wheel</td>		<td>画面のスクロール</td></tr>
+<tr><td>M-x goto-line</td>	<td>指定行へジャンプ</td></tr>
+</table>
+<br>
+<font color="orange">★日本語入力、記号入力、特殊入力</font>
+<table>
+<tr><td>C-\</td>				<td>日本語入力のON/OFF</td></tr>
+<tr><td>C-^</td>				<td>記号入力(Japanese-JISX0208、日本語入力モードでのみ有効)</td></tr>
+<tr><td>[Mule]-[Describe Coding Systems]</td>	<td>文字コードの変更</td></tr>
+<tr><td></td>					<td>※EUC:euc-japan-unix等</td></tr>
+<tr><td>M-x set-buffer-file-coding-system</td>	<td>文字コードの変更</td></tr>
+<tr><td>M-i</td>				<td>タブ入力</td></tr>
+<tr><td>C-d</td>				<td>一文字抹消</td></tr>
+</table>
+<br>
+<font color="orange">★漢字変換時</font>
+<table>
+<tr><td>C-i</td>		<td>文節縮め</td></tr>
+<tr><td>C-o</td>		<td>文節伸ばし</td></tr>
+<tr><td>M-h</td>		<td>平仮名変換</td></tr>
+<tr><td>M-k</td>		<td>片仮名変換</td></tr>
+</table>
+<br>
+<font color="orange">★ウインドウ分割</font>
+<table>
+<tr><td>C-x o</td>		<td>他のウインドウへカーソル移動</td></tr>
+<tr><td>C-x (数字)</td>	<td>指定した数にウインドウ分割</td></tr>
+<tr><td>C-x 0</td>		<td>カーソルがあるウインドウを消す</td></tr>
+<tr><td>C-x 1</td>		<td>カーソルがあるウインドウ以外を消す</td></tr>
+<tr><td>下barをCClick</td>	<td>そのウインドウ以外を消す</td></tr>
+</table>
+<br>
+<font color="orange">★オートフォーマット</font>
+<table>
+<tr><td>M-x auto-fill-mode</td>	<td>自動改行モードのON/OFF</td></tr>
+</table>
+<br>
+<font color="orange">★ディレクトリモードでの操作</font>
+<table>
+<tr><td>e</td>	<td>カーソル位置のファイルを開く</td></tr>
+<tr><td>d</td>	<td>削除マークを付ける</td></tr>
+<tr><td>u</td>	<td>削除マークを消す</td></tr>
+<tr><td>x</td>	<td>削除マーク付きファイルを削除</td></tr>
+</table>
+<br>
+<!--
+<font color="orange">★mh-e</font>
+<table>
+<tr><td>M-x mh-rmail</td>		<td>メールを読む</td></tr>
+<tr><td>M-x mh-smail</td>		<td>メールを送る</td></tr>
+<tr><td> </td>				<td> </td></tr>
+<tr><td>(以下、メール編集中)</td>	<td> </td></tr>
+<tr><td>C-c C-s</td>			<td>~/.signatureの内容を挿入</td></tr>
+<tr><td>C-c C-c</td>			<td>実際にメールを送る</td></tr>
+<tr><td>(以下、メール一覧で)</td>	<td> </td></tr>
+<tr><td>q</td>				<td>mh-e終了</td></tr>
+<tr><td>.</td>				<td>そのメールの内容を表示</td></tr>
+<tr><td>M-r</td>			<td>古いメールも表示</td></tr>
+<tr><td>i</td>				<td>新しいメールがないか確認</td></tr>
+<tr><td>&gt;</td>			<td>メールの内容をファイルに保存</td></tr>
+<tr><td>d</td>				<td>削除マークを付ける</td></tr>
+<tr><td>u</td>				<td>削除マークを消す</td></tr>
+<tr><td>x</td>				<td>削除マーク付きメールを削除(~/Mail/inboxに#付きで残る)</td></tr>
+</table>
+<br>
+<font color="orange">★Mew</font>
+<table>
+<tr><td>M-x mew</td>			<td>メールを読む</td></tr>
+<tr><td>M-x mew-send</td>		<td>メールを送る</td></tr>
+<tr><td> </td>				<td> </td></tr>
+<tr><td>(以下、メール編集中)</td>	<td> </td></tr>
+<tr><td>C-c TAB</td>			<td>~/.signatureの内容を挿入</td></tr>
+<tr><td>C-c C-c</td>			<td>実際にメールを送る</td></tr>
+<tr><td>(以下、メール一覧で)</td>	<td> </td></tr>
+<tr><td>q</td>				<td>Mew終了</td></tr>
+<tr><td>.</td>				<td>そのメールの内容を表示</td></tr>
+<tr><td>i</td>				<td>新しいメールがないか確認</td></tr>
+<tr><td>y</td>				<td>メールの内容をファイルに保存</td></tr>
+<tr><td>d</td>				<td>削除マークを付ける</td></tr>
+<tr><td>u</td>				<td>削除マークを消す</td></tr>
+<tr><td>x</td>				<td>削除マーク付きメールを削除(~/Mail/inboxに#付きで残る)</td></tr>
+</table>
+<br>
+-->
+
+<a name="latex"></a><h2>Latexに関するコマンド</h2>
+<font color="orange">★コンパイル、表示、印刷など</font>
+<table>
+<tr><td>platex <font color="gray">(file.tex)</font></td>			<td>.dviファイルを生成</td></tr>
+<tr><td>xdvi <font color="gray">(file.dvi)</font></td>				<td>.dviファイルを表示</td></tr>
+<tr><td>pdf2ps <font color="gray">(file.pdf)</font></td>			<td>pdfファイルをpsファイルに変換</td></tr>
+<tr><td>ps2epsi <font color="gray">(file.ps)</font></td>			<td>psファイルをepsiファイルに変換</td></tr>
+<tr><td>dvips <font color="gray">(file.dvi)</font> | lp -Tpostscript</td>	<td>.dviファイルを印刷(postscript)</td></tr>
+</table>
+<br>
+
+<a name="prog"></a><h2>プログラミングに関するコマンド</h2>
+<table>
+<tr><td>cc,gcc</td>						<td></td></tr>
+<tr><td>　<font color="gray">(file.[co])</font></td>		<td>コンパイル、リンクして実行ファイルa.outを生成</td></tr>
+<tr><td>　-c</td>						<td>コンパイルだけする</td></tr>
+<tr><td>　-o <font color="gray">(実行ファイル)</font></td>	<td>実行ファイル名を指定</td></tr>
+<tr><td>　-lm</td>						<td>数学関数を使う時必要</td></tr>
+<tr><td><font color="gray">(dir)</font>/<font color="gray">(file)</font></td>	<td>自作プログラム実行</td></tr>
+<tr><td>make</td>						<td>Makefileに従った動作をする</td></tr>
+<tr><td>javac <font color="gray">(file.java)</font></td>	<td>Javaコンパイラ</td></tr>
+<tr><td>java <font color="gray">(file.class)</font></td>	<td>Javaインタプリタ</td></tr>
+</table>
+<br>
+
+<a name="other"></a><h2>その他</h2>
+<table>
+<!--<tr><td>xgraph <font color="gray">(file)</font></td>		<td>グラフ表示</td></tr>-->
+<!--<tr><td>display <font color="gray">(file)</font></td>		<td>画像表示</td></tr>-->
+<tr><td>script</td>						<td>端末エミュレータ上の文字列をファイルに記録</td></tr>
+<tr><td>exit</td>						<td>scriptの終了、端末エミュレータの終了等</td></tr>
+<tr><td>xwd</td>						<td>Xwindowの表示を標準出力</td></tr>
+<tr><td></td>							<td></td></tr>
+<tr><td>--(特殊オプション)</td>					<td>それ以降の引数をオプションとみなさない</td></tr>
+<tr><td></td>							<td></td></tr>
+<tr><td>xeyes</td>						<td>目を表示</td></tr>
+<tr><td>pdftk</td>						<td>PDFファイルの編集 (参考：<a href="http://penguinitis.g1.xrea.com/computer/pdftk.html">http://penguinitis.g1.xrea.com/computer/pdftk.html</a>)</td></tr>
+</table>
+
+<p>
+※環境によって使えるコマンドに若干の違いがあるかと思います。ご了承ください。
+</p>
+
+<hr>
+<font size="+1"><a href="./">HOME</a></font><br>
+<!--img src="http://www.ritsumei.ac.jp/cgi-bin/nph-count?width=7&link=http://www.ritsumei.ac.jp/~tomori/unix.html"-->
+</body>
+</html>
