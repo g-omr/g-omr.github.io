@@ -13,7 +13,7 @@ BODY, TH, TD {font-size: 10pt; }
 </head>
 <body bgcolor="#ddffcc">
 
-<a href="#unix">UNIX</a>(<a href="#dir">ディレクトリ基本操作</a>、<a href="#file">ファイル操作</a>、<a href="#text">テキスト処理</a>、<a href="#cmd">コマンド履歴・再実行</a>、<a href="#prj">プロセス・ジョブ</a>、<a href="#prn">プリントアウト</a>、<a href="#secur">セキュリティ</a>、<a href="#du">使用容量</a>、<a href="#ln">リンク</a>、<a href="#al">エイリアス</a>、<a href="#man">コマンドを調べる</a>、<a href="#compdecomp">解凍・圧縮</a>、<a href="#network">ネットワーク</a>、<a href="#manage">システム管理</a>、<a href="#variable">シェル変数・環境変数</a>、<a href="#unix_other">その他</a>)、
+<a href="#unix">UNIX</a>(<a href="#dir">ディレクトリ基本操作</a>、<a href="#mount">ディスクとマウント</a>、<a href="#file">ファイル操作</a>、<a href="#text">テキスト処理</a>、<a href="#cmd">コマンド履歴・再実行</a>、<a href="#prj">プロセス・ジョブ</a>、<a href="#prn">プリントアウト</a>、<a href="#secur">セキュリティ</a>、<a href="#du">使用容量</a>、<a href="#ln">リンク</a>、<a href="#al">エイリアス</a>、<a href="#man">コマンドを調べる</a>、<a href="#compdecomp">解凍・圧縮</a>、<a href="#network">ネットワーク</a>、<a href="#manage">システム管理</a>、<a href="#variable">シェル変数・環境変数</a>、<a href="#unix_other">その他</a>)、
 <a href="#emacs">Emacs</a>、
 <a href="#latex">Latex</a>、
 <a href="#prog">プログラミング関連</a>、
@@ -46,9 +46,14 @@ BODY, TH, TD {font-size: 10pt; }
 <tr><td>cd -</td>						<td>直前のディレクトリへ移動(1つまでしか戻れない)</td></tr>
 <tr><td>pushd <font color="gray">(dir)</font></td>		<td>現在ディレクトリをディレクトリスタックに積み、ディレクトリ移動</td></tr>
 <tr><td>popd</td>				                             		<td>ディレクトリスタック先頭のディレクトリへ移動して、スタックから降ろす</td></tr>
+</table>
+<br> 
+<a name="mount"></a>
+<font color="orange">★ディスクとマウント</font>
+<table>
 <tr><td>fdisk -l</font></td>		                            <td>パーティションテーブルの表示（デバイスとディレクトリの対応確認）</td></tr> 
-<tr><td>mount <font color="gray">(dev) (dir)</font></td>		<td>指定されたデバイスを指定ディレクトリにマウント</td></tr>
-<tr><td>umount <font color="gray">(dir)</font></td>		     <td>指定されたディレクトリをアンマウント</td></tr>
+<tr><td>mount <font color="gray">(dev) (dir)</font></td>		<td>指定されたデバイスのファイルシステムをdirにマウント</td></tr>
+<tr><td>umount <font color="gray">(dir)</font></td>		     <td>指定されたディレクトリ以下のファイルシステムをアンマウント</td></tr>
 <tr><td>mountpoint <font color="gray">(dir)</font></td>			<td>指定ディレクトリがマウントポイントかどうかを返す(戻り値：マウントポイントなら0、そうでなければ非零)</td></tr>
 <tr><td>findmnt</td>					                                	<td>すべてのマウントポイントとデバイス、ファイルシステムの対応を確認</td></tr>
 </table>
