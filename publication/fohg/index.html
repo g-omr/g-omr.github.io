@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FOHG experiment results</title>
+<!--meta content="text/html;charset=Shift_JIS"-->
+</head>
+<body bgcolor="#ffffcc">
+
+<h1>Contents</h1>
+
+<s>実験結果データはこちらです → <a href="./test.7z">test.7z</a></s><br/>
+
+<pre>
+* ohgデータセットの説明
+
+(timestamp).xml
+    OperationRecorderが記録した操作履歴。
+about.txt
+    各事例の操作内容の説明。
+oracle.txt
+    MV-ASTの中身を文字列で出力したもの。
+
+    Origin &lt;aaaaaaaaaa&gt; 以降が最終的に生成されたMV-ASTの内容です。
+    それ以前の物は、各操作の適用後のMV-ASTの内容です。
+    各行が1つの構文要素を示します。構文要素の種類(elemType)、生存期間(timeFrom-timeTo)が示されています。
+    構文要素の種類の後に()付で親ノード中の自ノードの役割が示されます。
+    さらに、その後、名前やリテラル等を表現するノードの場合、()付でその内容が示されます。
+    ユニーク名を持つノードの場合、[]付でユニーク名が示されます。
+    行末に、当該ノードに張られているtrEdge(CHG, MOV, REORDER), 
+    cpEdge(CUT, PASTE), refEdge(リファクタリング名称)が示されています。
+    trEdgeについては、当該ノードから出ていくエッジのみ、
+    その他については、入ってくるエッジ、出ていくエッジともに示しています。
+
+    エッジの連結をわかりやすくするためにID付きでMV-ASTを表示した事例もあります
+    (この場合のファイル名はoracle_id.txt)。
+
+oracle (mvAst).txt     
+    oracle.txtから最終的なMV-ASTのみ手動で切り出したものです。
+ohgディレクトリ内                
+    グラフのノード、エッジの情報です。
+    ID aaaaaaaaaaのノードを起点にoutboundsで示されたエッジ、
+    そのエッジのdstを順に辿っていけばMV-ASTの内容を取得できます
+    (MV-ASTの全体像を見やすくするために上記のoracle.txtを用意しました)。
+
+論文中の事例との対応は以下の通りです。
+
+自動リファクタリング事例
+
+Rename Package                        v94 
+Rename Class                          v28(inner class), v82(top class) 
+Rename Method                         v8,45
+Rename Field                          v11
+Rename Local Variable                 v7,8,14,15
+Rename Type Variable                  v95
+Move Class                            v47,85 
+Move Method                           v83 
+Move Field                            v27,34,35 
+Move Type to New File                 v76 
+Extract Class                         v58 
+Extract Superlass                     v56 
+Extract Interface                     v57 
+Extract Method                        v46
+Extract Local Variable                v89
+Extract Constant                      v59
+Inline Method                         v84
+Inline Field                          v53
+Inline Local Variable                 v90
+Inline Constant                       v72
+Push Down Method                      v54
+Push Down Field                       v91
+Pull Up Method                        v50
+Pull Up Field                         v92
+Change Method Signature               v52,86 
+Convert Local Variable to Field       v79
+Convert Anonymous Class to Nested     v93
+Encapsulate Field                     v80
+Introduce Parameter                   v78 
+Introduce Parameter Object            v73 
+Introduce Indirection                 v74 
+Introduce Factory                     v81 
+Use Supertype Where Possible          v55 
+Infer Generic Type Arguments          v77 
+
+手動リファクタリング事例
+
+v1010 事例6
+v1011 事例9
+v1012 事例5
+v1013 事例8
+v1014 事例3
+v1015 事例4
+v1016 事例7
+v1017 事例10
+v1019 事例2
+v1021 事例1
+
+※Windowsではohg以下のフォルダ/ファイルは正しく扱えません。
+※論文中では可読性のためastNodeとした要素名は本データではnodeとなっています。</pre>
+
+</body>
+</html>
