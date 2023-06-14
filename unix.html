@@ -136,6 +136,8 @@ BODY, TH, TD {font-size: 10pt; }
 <tr><td>　-Lw</td>							<td>改行コードをCRLF(Windows形式)に変換</td></tr>
 <tr><td>　-Lm</td>							<td>改行コードをCR(Mac形式)に変換</td></tr>
 <tr><td>　--overwrite</td>						<td>入力ファイルに上書きして出力</td></tr>
+<tr><td>find . -type f -print0 | xargs --null nkf (options)</td>						<td>現在のディレクトリ以下の各ファイルに対してnkf(ファイル名に日本語等を含む場合)</td></tr>
+<tr><td>find . -type f | xargs nkf (options)</td>						               <td>現在のディレクトリ以下の各ファイルに対してnkf(ファイル名に日本語等を含まない場合)</td></tr>
 <tr><td>dos2unix -o <font color="gray">(file)</font></td>		<td>改行コード変換</td></tr>
 <tr><td>unix2dos -o <font color="gray">(file)</font></td>		<td>改行コード変換</td></tr>
 </table>
