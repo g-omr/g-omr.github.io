@@ -1,0 +1,69 @@
+<!ELEMENT OperationHistory (basicData, operations)>
+<!ATTLIST OperationHistory
+    version CDATA #REQUIRED
+>
+
+<!ELEMENT basicData (developer)>
+<!ELEMENT developer (#PCDATA)>
+
+<!ELEMENT operations (
+    normalOperation |
+    compoundOperation |
+    copyOperation |
+    menuOperation |
+    fileOperation |
+    commitOperation
+)*>
+
+<!ELEMENT normalOperation (inserted, deleted)>
+<!ATTLIST normalOperation
+    ccp    (NO | CUT | PASTE) #REQUIRED
+    file   CDATA #REQUIRED
+    hash   CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    time   CDATA #REQUIRED
+>
+
+<!ELEMENT inserted (#PCDATA)>
+<!ELEMENT deleted (#PCDATA)>
+
+<!ELEMENT compoundOperation (normalOperation+)>
+<!ATTLIST compoundOperation
+    name CDATA #REQUIRED
+    hash CDATA #REQUIRED
+    time CDATA #REQUIRED
+>
+
+<!ELEMENT copyOperation (copied)>
+<!ATTLIST copyOperation
+    file   CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    time   CDATA #REQUIRED
+>
+
+<!ELEMENT copied (#PCDATA)>
+
+<!ELEMENT menuOperation EMPTY>
+<!ATTLIST menuOperation
+    file  CDATA #REQUIRED
+    label CDATA #REQUIRED
+    time  CDATA #REQUIRED
+>
+
+<!ELEMENT fileOperation (code?)>
+<!ATTLIST fileOperation
+    file CDATA #REQUIRED
+    time CDATA #REQUIRED
+    type (SAVE | OPEN | CLOSE | ACT) #REQUIRED
+>
+
+<!ELEMENT code (#PCDATA)>
+
+<!ELEMENT commitOperation EMPTY>
+<!ATTLIST commitOperation
+    time    CDATA #REQUIRED
+    file    CDATA #REQUIRED
+    comment CDATA #REQUIRED
+>
+
+
